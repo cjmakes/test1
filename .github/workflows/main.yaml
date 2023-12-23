@@ -1,0 +1,17 @@
+on: [push]
+
+jobs:
+  clone_job:
+    runs-on: ubuntu-latest
+    name: clone a repo
+    steps:
+      - name: checkout test1
+        uses: actions/checkout@v4
+      - name: clone test2
+        env:
+          TEST2_KEY: ${{ secrets.TEST2_KEY }}
+        run: |
+          eval `ssh-agent -s`
+          ssh-add - <<< $TEST2_KEY
+          git clone ssh://git@github.com/cjmakes/test2
+          cat test2/README.md
