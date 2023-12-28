@@ -1,0 +1,5 @@
+name: 'test private repo'
+description: 'can clone private repo'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
