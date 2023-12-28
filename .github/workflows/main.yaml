@@ -7,7 +7,13 @@ jobs:
     steps:
       - name: checkout test1
         uses: actions/checkout@v4
+      - name: config ssh keys
+        env:
+          TEST2_KEY: ${{ secrets.TEST2_KEY }}
+        run: |
+          eval `ssh-agent -s`
+          echo "$TEST2_KEY" | tr -d '\r' | ssh-add -
+          ssh-add -L
       - name: clone test2
-        uses: ./
-        with:
-          test2_key: ${{ secrets.TEST2_KEY }}
+        run: |
+          git clone ssh://git@github.com/cjmakes/test2
