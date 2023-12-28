@@ -1,5 +1,15 @@
 name: 'test private repo'
 description: 'can clone private repo'
+inputs:
+  test2_key:
+    description: 'ssh key to private repo'
+    required: true
+    default: ''
+outputs:
+  test2: # id of output
+    description: 'content of test2 readme'
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.test2_key }}
